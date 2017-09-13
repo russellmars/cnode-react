@@ -1,0 +1,19 @@
+.topic__top {
+  padding: 10px;
+  line-height: 1.5;
+}
+
+.topic__title {
+  font-weight: bold;
+}
+
+.markdown-html {
+  word-wrap: break-word;
+}
+.markdown-html * {
+  max-width: 100%;
+}
+
+.markdown-html a {
+  text-decoration: none;
+}

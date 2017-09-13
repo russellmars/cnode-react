@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import axios from 'axios'
 import fecha from 'fecha'
+import { cnodeapi } from '../apis'
 import './Home.css'
 
 const tabs = [
@@ -62,8 +62,12 @@ function Avatar (props) {
 
 function TopicsItem (props) {
   const topic = props.topic
+  const history = props.history
+  const goTopicDetail = (id) => {
+    history.push(`/topic/${topic.id}`)
+  }
   return (
-    <div className="topic-item">
+    <div className="topic-item" onClick={goTopicDetail}>
       <div className="topic-item__top">
         <Avatar src={topic.author.avatar_url}></Avatar>
         <div className="topic-item__right">
@@ -97,15 +101,16 @@ class Home extends Component {
       topicList: []
     }
   }
-  
+
   componentDidMount () {
     this.fetchTopics()
   }
+
   async fetchTopics () {
-    const result = await axios.get('https://cnodejs.org/api/v1/topics')
-    if (result.status === 200 && result.data.success) {
+    const result = await cnodeapi.get('/topics')
+    if (result.success) {
       this.setState({
-        topicList: result.data.data
+        topicList: result.data
       })
     }
   }
@@ -118,7 +123,7 @@ class Home extends Component {
         <div className="topic-list">
           {
             topicList.map(topic => {
-              return <TopicsItem topic={topic} key={topic.id}></TopicsItem>
+              return <TopicsItem topic={topic} history={this.props.history} key={topic.id}></TopicsItem>
             })
           }
         </div>
