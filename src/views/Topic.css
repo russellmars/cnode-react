@@ -7,6 +7,23 @@
   font-weight: bold;
 }
 
+.topic__comment {
+
+}
+
+.reply, .topic__comment-num {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.reply {
+
+}
+
+.reply__top {
+  display: flex;
+
+}
+
 .markdown-html {
   word-wrap: break-word;
 }

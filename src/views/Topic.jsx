@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import './Topic.css'
 import { cnodeapi } from '../apis'
+
+function Reply (props) {
+  const { reply } = props
+    return (
+      <div className="reply">
+        <div className="reply__top">
+          <div>作者名字</div>
+          <div>2018-02-25</div>
+        </div>
+        <div className="markdown-html markdown-body" dangerouslySetInnerHTML={{__html: reply.content}}></div>
+      </div>
+    )
+}
 class Topic extends Component {
   constructor (props) {
     super(props)
@@ -16,7 +29,6 @@ class Topic extends Component {
         topic: result.data
       })
     }
-    console.log(this.state)
   }
 
   componentDidMount () {
@@ -30,13 +42,13 @@ class Topic extends Component {
       <div className="topic">
         <div className="topic__top">
           <div className="topic__title">{topic.title}</div>
-          <div className="topic__content markdown-html" dangerouslySetInnerHTML={{__html: topic.content}}></div>
+          <div className="topic__content markdown-html markdown-body" dangerouslySetInnerHTML={{__html: topic.content}}></div>
         </div>
         <div className="topic__comment">
-          <div className="topic__comment-num">{topic.reply_count}</div>
+          <div className="topic__comment-num">{topic.reply_count} 条回复</div>
           <div className="topic__comment-list">
             {topic.replies.map(reply => (
-              <div className="markdown-html" dangerouslySetInnerHTML={{__html: reply.content}}></div>
+              <Reply reply={reply} key={reply.id}/>
             ))}
           </div>
         </div>

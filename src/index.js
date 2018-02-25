@@ -5,6 +5,7 @@ import 'normalize.css';
 import './fonts/iconfont/iconfont.css';
 import './styles/reset.css';
 import './index.css';
+import 'github-markdown-css'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
